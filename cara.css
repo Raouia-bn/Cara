@@ -585,7 +585,11 @@ margin-right: 40px;
 #blog .blog-details a:hover{
     color: #088178;
 }
-.btn .btn-primary .btn-lg .btn-block{
+.titre
+{color:#088178;
+text-align: center;}
+#btn{
+    color:#ffffff;
     background-color: #088178;
 }
 

@@ -58,7 +58,7 @@ $categories = getAllcategories();
             </ul>
             <form class="d-flex" role="search" action="index.php" method="POST">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-              <button id="btn" id="sign" class="btn  btn-lg btn-block" type="submit">Search</button>
+              <button  id="titre" class="btn  btn-lg btn-block" type="submit">Search</button>
             </form>
             <?php
                 if (isset($_SESSION['nom'])){

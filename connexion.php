@@ -15,7 +15,7 @@ if(isset($_SESSION['nom']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cara</title>
-    <link rel="stylesheet" href="projet.css" />
+    <link rel="stylesheet" href="cara.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.css" >
   </head>
@@ -51,7 +51,7 @@ if (!empty($_POST)){ //click sur le button sauvegarder
            
             </div>
             <div class="form-outline mb-4">
-            <label class="form-label" for="typeTelX-2">Email</label>
+            <label  class="form-label" for="typeTelX-2">Email</label>
               <input type="email"  name ="email" id="typeTelX-2" class="form-control form-control-lg" />
         
             </div>
@@ -63,7 +63,7 @@ if (!empty($_POST)){ //click sur le button sauvegarder
 
        
             <div class="text-center">
-            <button  id="sign"class="btn btn-primary btn-lg btn-block " type="submit">Sign In</button>
+            <button id="btn" class="btn btn-primary btn-lg btn-block " type="submit">Sign In</button>
 </div>
 
           
