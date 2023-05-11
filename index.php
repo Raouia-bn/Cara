@@ -16,7 +16,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cara</title>
-    <link rel="stylesheet" href="projet.css" />
+    <link rel="stylesheet" href="css//projet.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -43,7 +43,7 @@ if (!empty($_POST)){
       foreach($produits as $produit){
         print ' 
       <div class="pro">
-        <img src="'.$produit['image'].'">
+        <img src="img/'.$produit['image'].'">
         <div class="des">
           <span>'.$produit['nom'].'</span>
           <h5>'.$produit['description'].'</h5>
@@ -56,7 +56,7 @@ if (!empty($_POST)){
            </div>
           <h4>'.$produit['prix'].'</h4>
         </div>
-        <a href="#"><i style="font-size:24px" class="fa cart">&#xf138;</i></a>
+        <a  href="seuleProduit.php?id='.$produit['id'].'"><i style="font-size:24px" class="fa cart">&#xf138;</i></a>
       </div>';
     }
     ?>

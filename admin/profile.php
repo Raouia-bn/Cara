@@ -22,7 +22,7 @@ session_start();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-
+<link rel="stylesheet" href="../../css/cara.css" />
     <!-- Bootstrap core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -75,9 +75,62 @@ session_start();
 <div class="container-fluid">
   <div class="row">
     
-<?php
-include "template/navigation.php";
-?>
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="#">
+              <span data-feather="home"></span>
+             Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories/liste.php">
+              <span data-feather="list"></span>
+              Categories
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="produits/liste.php">
+              <span data-feather="shopping-cart"></span>
+              Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="clients/liste.php">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="stock/liste.php">
+              <span data-feather="layers"></span>
+              Stock
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="commandes/liste.php">
+              <span data-feather="shopping-cart"></span>
+              Shopping cart 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="profile.php">
+              <span data-feather="user"></span>
+             Profil
+            </a>
+          </li>
+        </ul>
+
+        
+      </div>
+    </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Profil</h1>

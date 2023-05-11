@@ -3,11 +3,12 @@
 session_start();
 include "../../inc/functions.php";
 $categories = getAllcategories();
+$produits=getAllproducts();
 
-
-   
+$paniers=getAllpaniers();
   
-
+$commandes=getAllcommandes();
+  
 
 ?>
 <!doctype html>
@@ -60,7 +61,6 @@ $categories = getAllcategories();
     
     <!-- Custom styles for this template -->
     <link href="../../css/dashboard.css" rel="stylesheet">
-    
   </head>
   <body>
     
@@ -91,13 +91,13 @@ $categories = getAllcategories();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="liste.php">
+            <a class="nav-link" href="../categories/liste.php">
               <span data-feather="list"></span>
               Categories
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../produits/liste.php">
+            <a class="nav-link" href="liste.php">
               <span data-feather="shopping-cart"></span>
               Products
             </a>
@@ -115,7 +115,7 @@ $categories = getAllcategories();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../commandes/liste.php">
+            <a class="nav-link" href="liste.php">
               <span data-feather="shopping-cart"></span>
               Shopping cart 
             </a>
@@ -139,71 +139,64 @@ $categories = getAllcategories();
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">List of categories</h1>
+        <h1 class="h2">
+        List of shopping</h1>
        
-         <a href= "ajout.php" data-bs-toggle="modal" data-bs-target="#exampleModal"><i   style="font-size:25px;color:#088178"  class="fa fa-plus-circle" ></i></a>
+       <?php var_dump($commandes);?>
       
       </div>
-      <?php if (isset($_GET['ajout']) && $_GET['ajout']=="ok")
-      {print'<div  role="alert" class="alert alert-success">
-        Category add successfully
-        </div>';}
-      ?>
-      <?php if (isset($_GET['delete']) && $_GET['delete']=="ok")
-      {print'<div  role="alert" class="alert alert-danger">
-        Category delete successfully
-        </div>';} ?>
-        <?php if (isset($_GET['erreur']) && $_GET['erreur']=="duplicate")
-      {print'<div  role="alert" class="alert alert-danger">
-        Category already exists
-        </div>';}
-      ?>
-<!--list des categories-->
+      
+<!--list des produits-->
 <table class="table align-middle mb-0 bg-white">
   <thead class="bg-light">
     <tr>
     <th>#</th>
-      <th>Name</th>
-      <th>Description</th>
+      <th>Customer</th>
+      <th>Total</th>
+      <th>Date</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <?php
-    $i=0;
-    foreach($categories as $categorie)
-    { $i++;
-      print'
-      <tr>
-      <th scope="row">'.$i.'</th>
-        <td>
-          <div class="d-flex align-items-center">
-            
-            <div class="ms-3">
-              <p class="fw-bold mb-1">'.$categorie['nom'].'</p>
-         
-            </div>
+  <?php
+  $i=0;
+    foreach($paniers as $index =>$p)
+    {
+    $i++;
+    print'<tr>
+    <th scope="row">'.$i.'</th>
+      <td>
+        <div class="d-flex align-items-center">
+              <i style="color:#088178;font-size:30px;width: 50px; height: 50px;margin-top:20px;" class="fa cart rounded-circle"">&#xf07a;</i>
+          <div class="ms-3">
+            <p class="fw-bold mb-1">'.$p['nom'].' '.$p['prenom'].'</p>
+            <p class="text-muted mb-0">'.$p['tel'].'</p>
           </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">'.$categorie['description'].'</p>
-         
-        </td>
-        
-        <td>
-        <a onclick="return popUpDeleteCatagorie()" href="supprimer.php?idc='.$categorie['id'].'"> <button style="color:#088178" type="button" class="btn btn-link btn-sm btn-rounded">
-           Delete
-          </button></a>
-          <a data-bs-toggle="modal" data-bs-target="#updateModal'.$categorie['id'].'"><button style="color:#088178" type="button" class="btn btn-link btn-sm btn-rounded">
-          Edit
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">'.$p['total'].'$</p>
+       
+      </td>
+      <td>
+      <p class="fw-normal mb-1">'.$p['date_creation'].'</p>
+     
+    </td>
+      <td>
+      <a data-bs-toggle="modal" data-bs-target="#Commandes'.$p['id'].'">    <button type="button" class="btn btn-link btn-sm btn-rounded">
+      Display
         </button></a>
-        </td>
-      </tr>';}
+        <a onclick="return popUpDeleteProduct()"  href="supprimer.php?idp='.$p['id'].'">    <button type="button" class="btn btn-link btn-sm btn-rounded">
+        Delete
+      </button></a>
+      </td>
+    </tr>';}
     ?>
-  
-   
+    
+    
   </tbody>
 </table>
+
 
 
     </main>
@@ -211,69 +204,28 @@ $categories = getAllcategories();
 </div>
 
 
-<!-- Modal Add-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form  id="addform" action="ajout.php" method="post">
-          <div class="form-group"  id="blocknom">
-            <input type="text" id="nom" name="nom" required class="form-control" placeholder="Category Name ...">
-          </div>
-          <br>
-
-          <div class="form-group">
-            <textarea input type="text" required name="description" class="form-control" placeholder="Category Description ..."></textarea>
-          </div>
-
-
-       
-    
-      </div>
-      <div class="modal-footer">
-       
-        <button type="submit"  id="btn" class="btn btn-primary">Add</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 <?php
-foreach ($categories as $index => $categorie)
+foreach ($paniers as $index => $p)
 {?>
-<!-- Modal Update-->
-<div class="modal fade" id="updateModal<?php echo $categorie['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+<div class="modal fade" id="Commandes<?php echo $p['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">list of commands</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="modifier.php" method="post">
-          <input type="hidden" value="<?php echo $categorie['id'];?>" name="idc"/>
-        <div class="form-group">
-            <input type="text" name="nom" value="<?php echo $categorie['nom'];?>" class="form-control" placeholder="Category Name ..."/>
-          </div>
-          <br>
-
-          <div class="form-group">
-            <textarea  type="text" name="description" class="form-control" placeholder="Category Description ..."><?php echo $categorie['description'];?></textarea>
-          </div>
+        
+         
+</div>
 
 
 
     
       </div>
-      <div class="modal-footer">
-       
-        <button type="submit"  id="btn" class="btn btn-primary">Update</button>
-      </div>
-      </form>
+ 
+      
     </div>
   </div>
 </div>
@@ -281,7 +233,7 @@ foreach ($categories as $index => $categorie)
 }
 ?>
 
-<script src="../../script.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
@@ -291,8 +243,8 @@ foreach ($categories as $index => $categorie)
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     
       <script src="..\..\js\dashboard.js"></script>
-     
-      
+      <script src="../../script.js"></script>
+
   </body>
  
 </html>

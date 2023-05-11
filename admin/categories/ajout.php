@@ -3,7 +3,7 @@ session_start();
 //1-recuperation des donnes de la formulaire
 $nom= $_POST['nom'];
 $description= $_POST['description'];
-$createur = $_SESSION['id'];
+$createur = 1;
 $date_creation = date("Y-m_d");
 
 //2_la chaine de connexion

@@ -41,7 +41,7 @@ return $categories;
 function AddClient($data){
   $conn = connect();
    $mphash=md5($data['mdp']);
-  $requette = "INSERT INTO client(nom,prenom,email,mdp,tel) VALUES ('".$data['nom']."','".$data['prenom']."','".$data['email']."','". $mphash."','".$data['tel']."')";
+  $requette = "INSERT INTO client(nom,prenom,email,mdp,tel,etat) VALUES ('".$data['nom']."','".$data['prenom']."','".$data['email']."','". $mphash."','".$data['tel']."',0)";
 //execution
 $resultat = $conn->query($requette);
 if ($resultat){
@@ -126,6 +126,39 @@ var_dump($user);
 
 return $user;
 }
+function getAllClients()
+{$conn=connect();
+$requette="SELECT * FROM client WHERE etat=0";
+$resultat = $conn->query($requette);
+//l'execution
+$users = $resultat->fetchAll();
+return $users;}
+
+function getAllStocks()
+{$conn=connect();
+$requette="SELECT produit.nom,stock.id,produit.image,stock.quantite  FROM produit ,stock  WHERE produit.id = stock.produit;";
+$resultat = $conn->query($requette);
+//l'execution
+$stocks = $resultat->fetchAll();
+
+
+return $stocks;}
+function getAllpaniers()
+{
+  $conn=connect();
+  $requette="SELECT panier.id,client.nom,client.prenom,client.tel ,panier.total,panier.etat,panier.date_creation FROM panier , client WHERE panier.client = client.id;";
+  $resultat = $conn->query($requette);
+  //l'execution
+  $paniers = $resultat->fetchAll();
+return $paniers;}
+function getAllcommandes()
+{$conn=connect();
+  $requette="SELECT produit.nom,produit.image,commande.quantite,commande.total, commande.panier FROM commande,produit where commande.produit=produit.id;";
+  $resultat = $conn->query($requette);
+  //l'execution
+  $commandes = $resultat->fetchAll();
+return $commandes;}
+
 /** 
 
 

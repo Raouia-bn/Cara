@@ -10,6 +10,9 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/projet.css" />
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
@@ -18,7 +21,8 @@ include "inc/header.php";
 
 ?>
 <div class="container">
-<h1> Bienvenue <span class="text-primary"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ; ?></span></h1>
+<h1> Bienvenue <span class="text-primary"><?php echo $_SESSION['nom'] ; ?></span></h1>
+<h2>Email  <?php echo $_SESSION['prenom']; ?> </h2>
 <h2>Email  <?php echo $_SESSION['email']; ?> </h2>
 
 </div> 

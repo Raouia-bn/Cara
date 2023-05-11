@@ -396,6 +396,13 @@ padding: 30px;
  border-top-right-radius: 0;
  border-bottom-right-radius: 0;
 }
+#img{
+    width:65px;
+    height: 65;
+    clip-path:ellipse(50% 50%);
+    object-fit: cover;
+    margin-left: 15px;
+}
 #newsletter button{
     background-color: #088178;
     white-space: nowrap;
@@ -711,6 +718,13 @@ border: 1px solid #e1e1e1;}
     align-items: flex-start;
 }
 #form-details .people div img {
+    width:65px;
+    height: 65;
+    clip-path:ellipse(50% 50%);
+    object-fit: cover;
+    margin-left: 15px;
+}
+.image {
     width:65px;
     height: 65;
     clip-path:ellipse(50% 50%);

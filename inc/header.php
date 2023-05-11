@@ -43,7 +43,22 @@ $categories = getAllcategories();
                 print'<li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="profile.php">profile</a>
               </li>';
-               }else{
+              if( isset($_SESSION['panier']) && is_array($_SESSION['panier'][3]))
+              {print'
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="panier.php"><i class="fa fa-shopping-cart" style="font-size:24px"> ('.count($_SESSION['panier'][3]).')</i></a>
+              </li>';
+              }else{
+                print'
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="panier.php"><i class="fa fa-shopping-cart" style="font-size:24px"> (0)</i></a>
+              </li>';
+              }
+              
+            
+            
+            
+            }else{
                print' <li class="nav-item">
                <a class="nav-link" aria-current="page" href="connexion.php">Sign In</a>
              </li>
