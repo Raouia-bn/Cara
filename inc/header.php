@@ -64,7 +64,10 @@ $categories = getAllcategories();
              </li>
              <li class="nav-item">
                <a class="nav-link " aria-current="page" href="registre.php">Sign Up</a>
-             </li>';
+             </li>
+        <li><a href="blog.php">Blog</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="contact.php">Contact</a></li>';
                }?>
               
               

@@ -8,7 +8,15 @@ $produits=getAllproducts();
 $paniers=getAllpaniers();
   
 $commandes=getAllcommandes();
-  
+  if(isset($_POST['btnSubmit']))
+  {changerEtatPanier($_POST);}
+  $commandes=getAllcommandes();
+  if(isset($_POST['btnSearch']))
+  {if($_POST['etat']=="all")
+    {$paniers=getAllpaniers();}
+    else{
+    $paniers=getPaniersByEtat($paniers,$_POST['etat']);}
+    }
 
 ?>
 <!doctype html>
@@ -85,7 +93,7 @@ $commandes=getAllcommandes();
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">
+            <a class="nav-link " aria-current="page" href="../home.php">
               <span data-feather="home"></span>
              Home
             </a>
@@ -141,19 +149,37 @@ $commandes=getAllcommandes();
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
         List of shopping</h1>
+        
        
-       <?php var_dump($commandes);?>
       
       </div>
-      
-<!--list des produits-->
-<table class="table align-middle mb-0 bg-white">
+      <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" style="margin-top:30px;margin-bottom:30px" >
+   <div class="form-group d-flex">
+  
+   <select  name="etat"    class="form-control" >
+   <option value="">--Choose state--</option>
+   <option value="all">All</option>
+   <option value="in progress">In progress</option>
+   <option value="In delivery">In delivery</option>
+ 
+   <option value="Delivery completed">Delivery completed</option>
+</select>
+<br/>
+<input type="submit" name="btnSearch" id="btn" class="btn btn-primary ml-2" style="margin-left:10px;" value="Search"/>
+    </div>
+    
+
+  
+    </form>
+<!--list des panier-->
+<table class="table align-middle mb-0 bg-white" style="margin-top:10px;">
   <thead class="bg-light">
     <tr>
     <th>#</th>
       <th>Customer</th>
       <th>Total</th>
       <th>Date</th>
+      <th>State</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -182,12 +208,17 @@ $commandes=getAllcommandes();
       <p class="fw-normal mb-1">'.$p['date_creation'].'</p>
      
     </td>
+    <td>
+    <p class="fw-normal mb-1">'.$p['etat'].'</p>
+   
+  </td>
       <td>
       <a data-bs-toggle="modal" data-bs-target="#Commandes'.$p['id'].'">    <button type="button" class="btn btn-link btn-sm btn-rounded">
       Display
         </button></a>
-        <a onclick="return popUpDeleteProduct()"  href="supprimer.php?idp='.$p['id'].'">    <button type="button" class="btn btn-link btn-sm btn-rounded">
-        Delete
+        <a data-bs-toggle="modal" data-bs-target="#Traiter'.$p['id'].'">    <button type="button" class="btn btn-link btn-sm btn-rounded">
+        
+To treat
       </button></a>
       </td>
     </tr>';}
@@ -216,9 +247,105 @@ foreach ($paniers as $index => $p)
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <!--list des produits-->
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+    <th>#</th>
+      <th>Product name</th>
+     
+      <th>Quantity</th>
+      <th>Total</th>
+      <th>Panier</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+  $i=0;
+    foreach($commandes as $index =>$commande)
+    {
+    $i++;
+    if($commande['panier']==$p['id']){
+    print'<tr>
+    <th scope="row">'.$i.'</th>
+      <td>
+        <div class="d-flex align-items-center">
+        <img
+        src="../../img/'.$commande['image'].'"
+        alt=""
+        style="width: 45px; height: 45px"
+        class="rounded-circle"
+        />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">'.$commande['nom'].' </p>
         
+          </div>
+        </div>
+      </td>
+      <td>
+      <p class="fw-normal mb-1">'.$commande['quantite'].'pieces</p>
+     
+    </td>
+      <td>
+        <p class="fw-normal mb-1">'.$commande['total'].'$</p>
+       
+      </td>
+      <td>
+      <p class="fw-normal mb-1">'.$commande['panier'].'</p>
+     
+    </td>
+    
+    </tr>';}}
+    ?>
+    
+    
+  </tbody>
+</table>
          
+ </div>
+
+
+
+    
+      </div>
+ 
+      
+    </div>
+  </div>
 </div>
+<?php
+}
+foreach ($paniers as $index => $p)
+{?>
+ 
+<div class="modal fade" id="Traiter<?php echo $p['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">To treat</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+     
+     <input type="hidden" value="<?php echo $p['id'];?>" name="panier_id">
+     <div class="form-group">
+      <select name="etat"  class="form-control">
+    
+      <option value="In delivery">In delivery</option>
+    
+      <option value="Delivery completed">Delivery completed</option>
+      </select>
+</div>
+      <div class="modal-footer">
+       
+       <button type="submit" name="btnSubmit" id="btn" class="btn btn-primary">Save</button>
+     </div>
+</form>
+
+         
+ </div>
 
 
 

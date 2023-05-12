@@ -84,7 +84,7 @@ $produits=getAllproducts()
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">
+            <a class="nav-link " aria-current="page" href="../home.php">
               <span data-feather="home"></span>
              Home
             </a>
@@ -150,13 +150,17 @@ Products list</h1>
         </div>';}
       ?>
       <?php if (isset($_GET['delete']) && $_GET['delete']=="ok")
-      {print'<div  role="alert" class="alert alert-danger">
+      {print'<div  role="alert" class="alert alert-success">
         Category delete successfully
         </div>';} ?>
        <?php if (isset($_GET['erreur']) && $_GET['erreur']=="duplicate")
       {print'<div  role="alert" class="alert alert-danger">
         Category already exists
         </div>';}?>
+         <?php if (isset($_GET['modif']) && $_GET['modif']=="ok")
+        {print'<div  role="alert" class="alert alert-success">
+          Product update successfully
+          </div>';}?>
 <!--list des produits-->
 <table class="table align-middle mb-0 bg-white">
   <thead class="bg-light">
@@ -308,12 +312,12 @@ foreach ($produits as $index => $produit)
           <br>
 
           <div class="form-group">
-            <textarea  type="text" name="description" class="form-control" placeholder="Product Description ..."><?php echo $produit['description'];?></textarea>
+            <textarea  type="text" name="dcp" class="form-control" placeholder="Product Description ..."><?php echo $produit['description'];?></textarea>
           </div>
           <br>
 
 <div class="form-group">
-  <input  type="number" step="0.01" name="prix" class="form-control" placeholder="Product Price ..."><?php echo $produit['Prix'];?>/>
+  <input  type="number" step="0.01" name="prix" class="form-control" value="<?php echo $produit['prix'];?>" placeholder="Product Price ..."/>
 </div>
 
 

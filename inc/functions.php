@@ -158,7 +158,59 @@ function getAllcommandes()
   //l'execution
   $commandes = $resultat->fetchAll();
 return $commandes;}
+function changerEtatPanier($data)
+{$conn=connect();
 
+  $requette="UPDATE panier SET etat='".$data['etat']."' WHERE id= '".$data['panier_id']."' ";
+  $resultat = $conn->query($requette);
+  
+
+
+}
+function getPaniersByEtat($paniers,$etat)
+{
+$paniersEtat=array();
+foreach($paniers as $p)
+{
+ if($p['etat']== $etat)
+{array_push($paniersEtat,$p);
+
+}
+
+}
+return $paniersEtat;
+
+
+
+}
+function editAdmin($data)
+{$conn=connect();
+
+  if($data['pwd']!= ""){
+  $requette="UPDATE client SET nom='".$data['nom']."',prenom='".$data['prenom']."',email='".$data['email']."',tel='".$data['tel']."', mdp='".md5($data['pwd'])."' WHERE id= '".$data['id']."' ";
+  
+ }else { $requette="UPDATE client SET nom='".$data['nom']."',prenom='".$data['prenom']."',email='".$data['email']."',tel='".$data['tel']."'WHERE id= '".$data['id']."' ";}
+  $resultat = $conn->query($requette);
+ 
+}
+function getData()
+{  $data=array(); 
+  
+  $conn=connect();
+$requette1="SELECT COUNT(*) from produit";
+$resultat1=$conn->query($requette1);
+$nbrPrd=$resultat1->fetch();
+$requette2="SELECT COUNT(*) from client";
+$resultat2=$conn->query($requette2);
+$nbrClt=$resultat2->fetch();
+$requette3="SELECT COUNT(*) from categorie";
+$resultat3=$conn->query($requette3);
+$nbrCtg=$resultat3->fetch();
+$data["produits"]=$nbrPrd[0];
+$data["clients"]=$nbrClt[0];
+$data["categories"]=$nbrCtg[0];
+return $data;
+}
 /** 
 
 

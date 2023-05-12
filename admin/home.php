@@ -1,12 +1,9 @@
 <?php
-
+include "../inc/functions.php";
 session_start();
-include "../../inc/functions.php";
 
-$clients=getAllClients();
+$data=getData();
 
-   
-  
 
 
 ?>
@@ -19,17 +16,15 @@ $clients=getAllClients();
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Cara-Admin</title>
-    <link rel="stylesheet" href="../../css/cara.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-
+<link rel="stylesheet" href="../../css/cara.css" />
     <!-- Bootstrap core CSS -->
-<link href="../../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="../css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -59,62 +54,62 @@ $clients=getAllClients();
 
     
     <!-- Custom styles for this template -->
-    <link href="../../css/dashboard.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
   </head>
   <body>
     
 <header  style="background-color: white"  class="navbar navbar-brand sticky-top bg-brand flex-md-nowrap p-0 shadow">
-  <a  style="background-color: white" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><img src ="../../img/logo.png" class="logo" alt="Logo"></a>
+  <a  style="background-color: white" class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><img src ="../img/logo.png" class="logo" alt="Logo"></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <input class="form-control form-control-brand w-100" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav" style="color: white">
     <div class="nav-item text-nowrap" style="background-color: white">
-      <a  style="background-color: white" class="nav-link px-3" href="..\..\deconnexion.php"> <i  style="color: #088178 " class="fa fa-power-off"></i></a>
-    
+      <a  style="background-color: white" class="nav-link px-3" href="..\deconnexion.php"> <i  style="color: #088178 " class="fa fa-power-off"></i></a>
+     
     </div>
   </div>
 </header>
 
 <div class="container-fluid">
   <div class="row">
-   
+    
   <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="../home.php">
+            <a class="nav-link " aria-current="page" href="home.php">
               <span data-feather="home"></span>
              Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../categories/liste.php">
+            <a class="nav-link" href="categories/liste.php">
               <span data-feather="list"></span>
               Categories
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../produits/liste.php">
+            <a class="nav-link" href="produits/liste.php">
               <span data-feather="shopping-cart"></span>
               Products
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="liste.php">
+            <a class="nav-link" href="clients/liste.php">
               <span data-feather="users"></span>
               Customers
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../stock/liste.php">
+            <a class="nav-link" href="stock/liste.php">
               <span data-feather="layers"></span>
               Stock
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../commandes/liste.php">
+            <a class="nav-link" href="commandes/liste.php">
               <span data-feather="shopping-cart"></span>
               Shopping cart 
             </a>
@@ -126,7 +121,7 @@ $clients=getAllClients();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../profile.php">
+            <a class="nav-link active" href="profile.php">
               <span data-feather="user"></span>
              Profil
             </a>
@@ -138,82 +133,42 @@ $clients=getAllClients();
     </nav>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Customer list </h1>
-       
-         <a href= "ajout.php" data-bs-toggle="modal" data-bs-target="#exampleModal"><i   style="font-size:25px;color:#088178"  class="fa fa-plus-circle" ></i></a>
-      
+        <h1 class="h2">Home</h1>
       </div>
-      <?php if (isset($_GET['valider']) && $_GET['valider']=="ok")
-      {print'<div  role="alert" class="alert alert-success">
-       station  successfully
-        </div>';}
-      ?>
-<!--list des clients -->
-<table class="table align-middle mb-0 bg-white">
-  <thead class="bg-light">
-    <tr>
-    <th>#</th>
-      <th>Name</th>
-      <th>Telephone</th>
-  
-      <th>State</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-  $i=0;
-    foreach($clients as $index =>$client)
-    {
-    $i++;
-    print'<tr>
-    <th scope="row">'.$i.'</th>
-      <td>
-        <div class="d-flex align-items-center">
-          
-          <div class="ms-3">
-            <p class="fw-bold mb-1">'.$client['nom'].'  '.$client['prenom'].' </p>
-            <p class="text-muted mb-0">'.$client['email'].'</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">'.$client['tel'].'$</p>
-       
-      </td>
+      <div class="container">
+     
+        <div class="row col-12">
+            <div class="col-4 text-center m-2 p-3">
+                   <h4> Number of products</h4>
+                   <br>
+                    <?php  echo $data['produits']?>
+               </div>
+          <div class="col-4 text-center m-2 p-3">
+                    <h4>Number of customers</h4>
+                    <br>
+                    <?php  echo $data['clients']?>
+           </div>
+          <div class="col-4 text-center m-2 p-3">
+                    <h4>Number of categories</h4>
+                    <br>
+                    <?php  echo $data['categories']?>
+            </div>
+</div>
+    </div>
+
       
-      <td>
-      <a href="valider.php?id='.$client['id'].'">    <button  style="color:#088178"type="button" class="btn  btn-sm btn-rounded">
-      Validate
-        </button></a>
-      
-      </td>
-    </tr>';}
-    ?>
-    
-    
-  </tbody>
-</table>
-
-
-
     </main>
   </div>
 </div>
-
-
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
-    <script src="..\..\js\bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="..\js\bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     
-      <script src="..\..\js\dashboard.js"></script>
-      <script src="../../script.js"></script>
+      <script src="..\js\dashboard.js"></script>
+     
 
   </body>
  

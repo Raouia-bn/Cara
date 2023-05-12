@@ -85,7 +85,7 @@ $categories = getAllcategories();
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="#">
+            <a class="nav-link " aria-current="page" href="../home.php">
               <span data-feather="home"></span>
              Home
             </a>
@@ -150,13 +150,18 @@ $categories = getAllcategories();
         </div>';}
       ?>
       <?php if (isset($_GET['delete']) && $_GET['delete']=="ok")
-      {print'<div  role="alert" class="alert alert-danger">
+      {print'<div  role="alert" class="alert alert-success">
         Category delete successfully
         </div>';} ?>
         <?php if (isset($_GET['erreur']) && $_GET['erreur']=="duplicate")
       {print'<div  role="alert" class="alert alert-danger">
         Category already exists
         </div>';}
+        ?>
+        <?php if (isset($_GET['modif']) && $_GET['modif']=="ok")
+        {print'<div  role="alert" class="alert alert-success">
+          Category update successfully
+          </div>';}
       ?>
 <!--list des categories-->
 <table class="table align-middle mb-0 bg-white">
